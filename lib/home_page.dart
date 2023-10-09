@@ -2,7 +2,14 @@ import 'package:dark_light_mode/theme/theme.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+  final VoidCallback onToggleThemeMode;
+  final String themeMode;
+
+  const HomePage({
+    super.key,
+    required this.onToggleThemeMode,
+    required this.themeMode,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -13,6 +20,8 @@ class HomePage extends StatelessWidget {
           color: Theme.of(context).extension<AppColors>()?.primary,
           child: MyButton(
             color: Theme.of(context).extension<AppColors>()?.secondary,
+            text: themeMode,
+            onTap: onToggleThemeMode,
           ),
         ),
       ),
@@ -48,11 +57,13 @@ class MyBox extends StatelessWidget {
 class MyButton extends StatelessWidget {
   final Color? color;
   final VoidCallback? onTap;
+  final String text;
 
   const MyButton({
     super.key,
     this.color,
     this.onTap,
+    this.text = 'Tap',
   });
 
   @override
@@ -64,9 +75,8 @@ class MyButton extends StatelessWidget {
           color: color,
           borderRadius: BorderRadius.circular(8),
         ),
-        padding: const EdgeInsets.all(25),
-        child: const Center(
-          child: Text('TAP'),
+        child: Center(
+          child: Text(text.toUpperCase()),
         ),
       ),
     );
