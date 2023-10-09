@@ -1,3 +1,4 @@
+import 'package:dark_light_mode/theme/theme.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
@@ -6,12 +7,12 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.deepPurple[500],
+      backgroundColor: Theme.of(context).extension<AppColors>()?.background,
       body: Center(
         child: MyBox(
-          color: Colors.deepPurple[300],
+          color: Theme.of(context).extension<AppColors>()?.primary,
           child: MyButton(
-            color: Colors.deepPurple[200],
+            color: Theme.of(context).extension<AppColors>()?.secondary,
           ),
         ),
       ),
