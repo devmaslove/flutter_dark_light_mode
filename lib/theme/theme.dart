@@ -37,6 +37,10 @@ class AppColors extends ThemeExtension<AppColors> {
     );
   }
 
+  static AppColors of(BuildContext context) {
+    return Theme.of(context).extension<AppColors>()!;
+  }
+
   factory AppColors.light() => AppColors(
     background: Colors.grey.shade400,
     primary: Colors.grey.shade300,
