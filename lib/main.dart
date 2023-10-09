@@ -14,19 +14,19 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  ThemeMode currentTheme = ThemeMode.system;
+  ThemeMode currentThemeMode = ThemeMode.system;
 
   void toggleTheme() {
     setState(() {
-      switch (currentTheme) {
+      switch (currentThemeMode) {
         case ThemeMode.system:
-          currentTheme = ThemeMode.light;
+          currentThemeMode = ThemeMode.light;
           break;
         case ThemeMode.light:
-          currentTheme = ThemeMode.dark;
+          currentThemeMode = ThemeMode.dark;
           break;
         default:
-          currentTheme = ThemeMode.system;
+          currentThemeMode = ThemeMode.system;
       }
     });
   }
@@ -34,13 +34,12 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
       theme: lightTheme,
       darkTheme: darkTheme,
-      themeMode: currentTheme,
+      themeMode: currentThemeMode,
       home: HomePage(
         onToggleThemeMode: toggleTheme,
-        themeMode: currentTheme.name,
+        themeMode: currentThemeMode.name,
       ),
     );
   }
