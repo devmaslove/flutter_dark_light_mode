@@ -1,24 +1,24 @@
 import 'package:flutter/material.dart';
 
 @immutable
-class AppColors extends ThemeExtension<AppColors> {
+class ThemeColors extends ThemeExtension<ThemeColors> {
   final Color? background;
   final Color? primary;
   final Color? secondary;
 
-  const AppColors({
+  const ThemeColors({
     required this.background,
     required this.primary,
     required this.secondary,
   });
 
   @override
-  AppColors copyWith({
+  ThemeColors copyWith({
     Color? background,
     Color? primary,
     Color? secondary,
   }) {
-    return AppColors(
+    return ThemeColors(
       background: background ?? this.background,
       primary: primary ?? this.primary,
       secondary: secondary ?? this.secondary,
@@ -26,32 +26,36 @@ class AppColors extends ThemeExtension<AppColors> {
   }
 
   @override
-  AppColors lerp(AppColors? other, double t) {
-    if (other is! AppColors) {
+  ThemeColors lerp(ThemeColors? other, double t) {
+    if (other is! ThemeColors) {
       return this;
     }
-    return AppColors(
+    return ThemeColors(
       background: Color.lerp(background, other.background, t),
       primary: Color.lerp(primary, other.primary, t),
       secondary: Color.lerp(secondary, other.secondary, t),
     );
   }
 
-  static AppColors of(BuildContext context) {
-    return Theme.of(context).extension<AppColors>()!;
+  static ThemeColors of(BuildContext context) {
+    return Theme.of(context).extension<ThemeColors>()!;
   }
 
-  factory AppColors.light() => AppColors(
+  factory ThemeColors.light() => ThemeColors(
     background: Colors.grey.shade400,
     primary: Colors.grey.shade300,
     secondary: Colors.grey.shade200,
   );
 
-  factory AppColors.dark() => AppColors(
+  factory ThemeColors.dark() => ThemeColors(
     background: Colors.grey.shade900,
     primary: Colors.grey.shade800,
     secondary: Colors.grey.shade700,
   );
+}
+
+extension BuildContextAppColors on BuildContext {
+  ThemeColors get themeColors => Theme.of(this).extension<ThemeColors>()!;
 }
 
 ThemeData lightTheme = ThemeData(
@@ -62,7 +66,7 @@ ThemeData lightTheme = ThemeData(
   ),
   useMaterial3: true,
   extensions: [
-    AppColors.light(),
+    ThemeColors.light(),
   ],
 );
 
@@ -74,6 +78,6 @@ ThemeData darkTheme = ThemeData(
   ),
   useMaterial3: true,
   extensions: [
-    AppColors.dark(),
+    ThemeColors.dark(),
   ],
 );
